@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, Image, StyleSheet, SafeAreaView } from "react-native";
 
 /**
- * Inserimento di 50 carte da gioco con: indice di sfortuna, immagine inerente e il titolo della carta 
+ * @description Inserimento di 50 carte da gioco con: indice di sfortuna, immagine inerente e il titolo della carta 
  */
 
 const Carte = [
@@ -37,10 +37,11 @@ const Carte = [
     { id: 24, nome: "Ti si rompe il borsone", immagine: "https://copilot.microsoft.com/th/id/BCO.c281515e-0f77-4d3d-9ba1-7e8f7ae3ef2c.png", indice: 51.0 },
     { id: 25, nome: "Ti si incastra la felpa", immagine: "https://copilot.microsoft.com/th/id/BCO.f5f662c7-de14-4e70-abdc-50b9619e6ab9.png", indice: 53.0 },
     { id: 26, nome: "Ti cade la racchetta", immagine: "https://copilot.microsoft.com/th/id/BCO.88bc9ae3-ba7a-4062-a713-bdce5bd13fd9.png", indice: 55.0 },
-
-
-
-
+    { id: 27, nome: "Passa il tuo idolo davanti ma non riesci a farti una foto", immagine: "https://copilot.microsoft.com/th/id/BCO.9858a1c5-2d76-4d46-b042-8d7ee6c58456.png", indice: 57.0 },
+    { id: 28, nome: "Ti si buca il calzino", immagine: "https://copilot.microsoft.com/th/id/BCO.d58e5966-6eae-4fd7-bba9-0f110c08fa82.png", indice: 59.0 },
+    { id: 29, nome: "Ti si incastra la scarpa", immagine: "https://copilot.microsoft.com/th/id/BCO.5d2137bf-26f7-4926-ab74-2b6e2ecf80b0.png", indice: 61.0 },
+    { id: 30, nome: "Ti dimentichi la fascia", immagine: "https://copilot.microsoft.com/th/id/BCO.b478e765-ed81-4919-967d-d560f290f748.png", indice: 63.0 },
+    { id: 31, nome: "Ti viene la febbre prima del torneo", immagine: "https://copilot.microsoft.com/th/id/BCO.d77794ad-cc35-4334-ad36-f76e35e0c931.png", indice: 65.0 },
 
 
 
@@ -106,7 +107,26 @@ export default function App (){
       </Text>
     );
   };
+  
+  /**
+   * @description Controllo della posizione corretta all'interno del mazzo, se la carta è stata messa nella posizione giusta viene aggiunta
+   * al mazzo, in caso contrario viene tolta una vita e un cuore diventa di colore bianco
+   */
 
+  const controlla = (posizioneScelta) => {
+    const ordinata = [...mano, cartaRound].sort((a, b) => a.indice - b.indice);
+    const posizioneCorretta = ordinata.indexOf(cartaRound);
+
+    if (posizioneScelta === posizioneCorretta) {
+      setMano(ordinata);
+      setMessaggio("CORRETTO! Hai ottenuto la carta.");
+    } else {
+      setVite(vite - 1);
+      setMessaggio("SBAGLIATO! Hai perso una vita.");
+    }
+
+    setFase("risultato");
+  };
 
 
 
