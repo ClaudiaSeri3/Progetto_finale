@@ -42,13 +42,13 @@ const Carte = [
     { id: 29, nome: "Ti si incastra la scarpa", immagine: "https://copilot.microsoft.com/th/id/BCO.5d2137bf-26f7-4926-ab74-2b6e2ecf80b0.png", indice: 61.0 },
     { id: 30, nome: "Ti dimentichi la fascia", immagine: "https://copilot.microsoft.com/th/id/BCO.b478e765-ed81-4919-967d-d560f290f748.png", indice: 63.0 },
     { id: 31, nome: "Ti viene la febbre prima del torneo", immagine: "https://copilot.microsoft.com/th/id/BCO.d77794ad-cc35-4334-ad36-f76e35e0c931.png", indice: 65.0 },
-
-
-
-
-
-
-
+    { id: 32, nome: "Si rompe il canestro mentre stai facendo una schiacciata", immagine: "https://copilot.microsoft.com/th/id/BCO.f02f9044-fba8-4232-bff3-f75d80e7aadd.png", indice: 80.0 },
+    { id: 33, nome: "Entrare in campo da titolare e prendere un rosso dopo 3 minuti", immagine: "https://copilot.microsoft.com/th/id/BCO.fffdcfab-ce9f-4a70-9704-2c1b38cddf92.png", indice: 69.0 },
+    { id: 34, nome: "Ti cade la felpa nel fango", immagine: "https://copilot.microsoft.com/th/id/BCO.a3e8b67e-6988-4cdf-94c0-27e5eacb519b.png", indice: 71.0 },
+    { id: 35, nome: "Perdere la medaglia mentre sali sul podio", immagine: "https://copilot.microsoft.com/th/id/BCO.20fe7069-60a5-4dad-b285-48be6da522fc.png", indice: 73.0 },
+    { id: 36, nome: "Entrare in campo con due scarpe diverse", immagine: "https://copilot.microsoft.com/th/id/BCO.6b23a8c9-0805-4661-a952-dd24cf0c9470.png", indice: 75.0 },
+    { id: 37, nome: "Fare il tuffo perfetto e perdere la cuffia in acqua", immagine: "https://copilot.microsoft.com/th/id/BCO.abb672fb-afe3-4bdf-a1e9-f7e8848f5378.png", indice: 77.0 },
+    { id: 38, nome: "Fare una partenza falsa quando nessuno era ancora partito", immagine: "https://copilot.microsoft.com/th/id/BCO.b1c1df6a-df8e-46bd-9033-97a4d41575d6.png", indice: 79.0 },
 
 
 
@@ -215,23 +215,15 @@ export default function App (){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 20 },
+  center: { flex: 1, justifyContent: "center", alignItems: "center" },
+  titolo: { fontSize: 35, fontWeight: "bold", marginBottom: 20, alignItems: "center", marginLeft: 65, marginTop: 25, color: "blue" },
+  info: { fontSize: 18, marginBottom: 5, alignItems: "center" },
+  timer: { fontSize: 26, fontWeight: "bold", color: "red", marginBottom: 10 },
+  vite: { fontSize: 30, marginBottom: 10, alignItems: "center", marginLeft: 250, marginTop: 15 },
+  img: { width: "40%", height: 200, marginVertical: 10, borderRadius: 10, resizeMode: "cover", marginLeft: 110},
+  nome: { fontSize: 20, marginTop: 10 },
+});
 
 }
-
-
-
-
-
-
