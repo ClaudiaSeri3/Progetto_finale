@@ -6,12 +6,8 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button, Image, StyleSheet, SafeAreaView } from "react-native";
 
-/**
- * @description Inserimento di 50 carte da gioco con: indice di sfortuna, immagine inerente e il titolo della carta 
- */
-
 const Carte = [
-    { id: 1, nome: "Ti si rompe la racchetta", immagine: "https://copilot.microsoft.com/th/id/BCO.27daff15-dd98-4756-ac8d-bbd460beb670.png", indice: 80.0 },
+  { id: 1, nome: "Ti si rompe la racchetta", immagine: "https://copilot.microsoft.com/th/id/BCO.27daff15-dd98-4756-ac8d-bbd460beb670.png", indice: 80.0 },
     { id: 2, nome: "Perdi una partita facile", immagine: "https://copilot.microsoft.com/th/id/BCO.26318cb1-5b12-4560-b552-1163360709e5.png", indice: 30.0 },
     { id: 3, nome: "Scivoli davanti a tutti", immagine: "https://copilot.microsoft.com/th/id/BCO.a1e5e8bc-4b07-476b-b0f1-a514af83949b.png", indice: 20.0 },
     { id: 4, nome: "Ti cade la borraccia", immagine: "https://copilot.microsoft.com/th/id/BCO.25be48cb-b3a8-47cb-9d88-d0b0255f3880.png", indice: 8.0 },
@@ -27,78 +23,113 @@ const Carte = [
     { id: 14, nome: "Ti dimentichi l'asciugamano", immagine: "https://copilot.microsoft.com/th/id/BCO.e2197822-3ff5-42cc-bcb4-0b98924a4d40.png", indice: 31.0 },
     { id: 15, nome: "Perdi un punto per distrazione", immagine: "https://copilot.microsoft.com/th/id/BCO.90d024d4-7f02-49d3-bc96-25e851300d6c.png", indice: 33.0 },
     { id: 16, nome: "Ti si rompe il laccio", immagine: "https://copilot.microsoft.com/th/id/BCO.5acffb29-6429-4a44-8117-298693c9c467.png", indice: 35.0 },
-    { id: 17, nome: "Si spezza la barretta energetica durante un match", immagine: "https://copilot.microsoft.com/th/id/BCO.ab7c604c-16c9-482b-a619-6660c15e0f99.png", indice: 37.0 }, 
-    { id: 18, nome: "Sbagli un gol", immagine: "https://copilot.microsoft.com/th/id/BCO.0a5dc312-14ef-40c6-8b4f-dc9c4da2f9dc.png", indice: 39.0 },
-    { id: 19, nome: "Inciampi nel tappetino", immagine: "https://copilot.microsoft.com/th/id/BCO.bd96b124-6700-4cd5-a3a2-9a59a9787a7d.png", indice: 41.0 },
-    { id: 20, nome: "Ti si rompe il grip", immagine: "https://copilot.microsoft.com/th/id/BCO.d9227356-8f46-4cc8-9530-dcbb4e71358e.png", indice: 43.0 },
-    { id: 21, nome: "Ti dimentichi la maglia di ricambio", immagine: "https://copilot.microsoft.com/th/id/BCO.e581f928-d445-491c-a692-3682da182123.png", indice: 45.0 },
-    { id: 22, nome: "Ti entra un insetto in faccia", immagine: "https://copilot.microsoft.com/th/id/BCO.65cda21e-705f-48da-a39f-9cf76cb3740f.png", indice: 47.0 },
-    { id: 23, nome: "Sbagli la battuta decisiva", immagine: "https://copilot.microsoft.com/th/id/BCO.d8c536a1-0a57-45f4-b45b-254bdb31bfd5.png", indice: 49.0 },
+    { id: 17, nome: "Si spezza la barretta energetica durante un match", immagine: "https://copilot.microsoft.com/th/id/BCO.ab7c604c-16c9-482b-a619-6660c15e0f99.png", indice: 13.0 }, 
+    { id: 18, nome: "Sbagli un gol", immagine: "https://copilot.microsoft.com/th/id/BCO.0a5dc312-14ef-40c6-8b4f-dc9c4da2f9dc.png", indice: 35.0 },
+    { id: 19, nome: "Inciampi nel tappetino", immagine: "https://copilot.microsoft.com/th/id/BCO.bd96b124-6700-4cd5-a3a2-9a59a9787a7d.png", indice: 30.0 },
+    { id: 20, nome: "Ti si rompe il grip", immagine: "https://copilot.microsoft.com/th/id/BCO.d9227356-8f46-4cc8-9530-dcbb4e71358e.png", indice: 56.0 },
+    { id: 21, nome: "Ti dimentichi la maglia di ricambio", immagine: "https://copilot.microsoft.com/th/id/BCO.e581f928-d445-491c-a692-3682da182123.png", indice: 40.0 },
+    { id: 22, nome: "Ti entra un insetto in faccia", immagine: "https://copilot.microsoft.com/th/id/BCO.65cda21e-705f-48da-a39f-9cf76cb3740f.png", indice: 65.0 },
+    { id: 23, nome: "Sbagli la battuta decisiva", immagine: "https://copilot.microsoft.com/th/id/BCO.d8c536a1-0a57-45f4-b45b-254bdb31bfd5.png", indice: 75.0 },
     { id: 24, nome: "Ti si rompe il borsone", immagine: "https://copilot.microsoft.com/th/id/BCO.c281515e-0f77-4d3d-9ba1-7e8f7ae3ef2c.png", indice: 51.0 },
-    { id: 25, nome: "Ti si incastra la felpa", immagine: "https://copilot.microsoft.com/th/id/BCO.f5f662c7-de14-4e70-abdc-50b9619e6ab9.png", indice: 53.0 },
-    { id: 26, nome: "Ti cade la racchetta", immagine: "https://copilot.microsoft.com/th/id/BCO.88bc9ae3-ba7a-4062-a713-bdce5bd13fd9.png", indice: 55.0 },
-    { id: 27, nome: "Passa il tuo idolo davanti ma non riesci a farti una foto", immagine: "https://copilot.microsoft.com/th/id/BCO.9858a1c5-2d76-4d46-b042-8d7ee6c58456.png", indice: 57.0 },
-    { id: 28, nome: "Ti si buca il calzino", immagine: "https://copilot.microsoft.com/th/id/BCO.d58e5966-6eae-4fd7-bba9-0f110c08fa82.png", indice: 59.0 },
-    { id: 29, nome: "Ti si incastra la scarpa", immagine: "https://copilot.microsoft.com/th/id/BCO.5d2137bf-26f7-4926-ab74-2b6e2ecf80b0.png", indice: 61.0 },
-    { id: 30, nome: "Ti dimentichi la fascia", immagine: "https://copilot.microsoft.com/th/id/BCO.b478e765-ed81-4919-967d-d560f290f748.png", indice: 63.0 },
-    { id: 31, nome: "Ti viene la febbre prima del torneo", immagine: "https://copilot.microsoft.com/th/id/BCO.d77794ad-cc35-4334-ad36-f76e35e0c931.png", indice: 65.0 },
+    { id: 25, nome: "Ti si incastra la felpa", immagine: "https://copilot.microsoft.com/th/id/BCO.f5f662c7-de14-4e70-abdc-50b9619e6ab9.png", indice: 8.0 },
+    { id: 26, nome: "Ti cade la racchetta", immagine: "https://copilot.microsoft.com/th/id/BCO.88bc9ae3-ba7a-4062-a713-bdce5bd13fd9.png", indice: 15.0 },
+    { id: 27, nome: "Passa il tuo idolo davanti ma non riesci a farti una foto", immagine: "https://copilot.microsoft.com/th/id/BCO.9858a1c5-2d76-4d46-b042-8d7ee6c58456.png", indice: 85.0 },
+    { id: 28, nome: "Ti si buca il calzino", immagine: "https://copilot.microsoft.com/th/id/BCO.d58e5966-6eae-4fd7-bba9-0f110c08fa82.png", indice: 25.0 },
+    { id: 29, nome: "Ti si incastra la scarpa", immagine: "https://copilot.microsoft.com/th/id/BCO.5d2137bf-26f7-4926-ab74-2b6e2ecf80b0.png", indice: 10.0 },
+    { id: 30, nome: "Ti dimentichi la fascia", immagine: "https://copilot.microsoft.com/th/id/BCO.b478e765-ed81-4919-967d-d560f290f748.png", indice: 40.0 },
+    { id: 31, nome: "Ti viene la febbre prima del torneo", immagine: "https://copilot.microsoft.com/th/id/BCO.d77794ad-cc35-4334-ad36-f76e35e0c931.png", indice: 90.0 },
     { id: 32, nome: "Si rompe il canestro mentre stai facendo una schiacciata", immagine: "https://copilot.microsoft.com/th/id/BCO.f02f9044-fba8-4232-bff3-f75d80e7aadd.png", indice: 80.0 },
     { id: 33, nome: "Entrare in campo da titolare e prendere un rosso dopo 3 minuti", immagine: "https://copilot.microsoft.com/th/id/BCO.fffdcfab-ce9f-4a70-9704-2c1b38cddf92.png", indice: 69.0 },
     { id: 34, nome: "Ti cade la felpa nel fango", immagine: "https://copilot.microsoft.com/th/id/BCO.a3e8b67e-6988-4cdf-94c0-27e5eacb519b.png", indice: 71.0 },
     { id: 35, nome: "Perdere la medaglia mentre sali sul podio", immagine: "https://copilot.microsoft.com/th/id/BCO.20fe7069-60a5-4dad-b285-48be6da522fc.png", indice: 73.0 },
     { id: 36, nome: "Entrare in campo con due scarpe diverse", immagine: "https://copilot.microsoft.com/th/id/BCO.6b23a8c9-0805-4661-a952-dd24cf0c9470.png", indice: 75.0 },
-    { id: 37, nome: "Fare il tuffo perfetto e perdere la cuffia in acqua", immagine: "https://copilot.microsoft.com/th/id/BCO.abb672fb-afe3-4bdf-a1e9-f7e8848f5378.png", indice: 77.0 },
+    { id: 37, nome: "Fare il tuffo perfetto e perdere la cuffia in acqua", immagine: "https://copilot.microsoft.com/th/id/BCO.abb672fb-afe3-4bdf-a1e9-f7e8848f5378.png", indice: 35.0 },
     { id: 38, nome: "Fare una partenza falsa quando nessuno era ancora partito", immagine: "https://copilot.microsoft.com/th/id/BCO.b1c1df6a-df8e-46bd-9033-97a4d41575d6.png", indice: 79.0 },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    { id: 39, nome: "Piove durante una partita di tennis", immagine: "https://copilot.microsoft.com/th/id/BCO.ead0455b-0040-4fca-bccd-af2ff60a9076.png", indice: 85.0 },
+    { id: 40, nome: "Ti si rompe il crociato", immagine: "https://copilot.microsoft.com/th/id/BCO.e6b6e68d-7df9-4a5c-9188-a25a8cbd50c3.png", indice: 100.0 },
+    { id: 41, nome: "Cadere durante una gara di sci", immagine: "https://copilot.microsoft.com/th/id/BCO.ea8c9416-a85e-49df-b98f-e39a10c9f115.png", indice: 85.0 },
+    { id: 42, nome: "Dimentichi la collana portafortuna prima di un match", immagine: "https://copilot.microsoft.com/th/id/BCO.31f83c05-18f4-44e8-ac34-0856cd8a1f5e.png", indice: 87.0 },
+    { id: 43, nome: "Cadi durante il saggio di danza", immagine: "https://copilot.microsoft.com/th/id/BCO.e7c92c43-d384-4dbf-8e9a-bac0b93f5817.png", indice: 89.0 },
+    { id: 44, nome: "Ti si rompe la suola", immagine: "https://copilot.microsoft.com/th/id/BCO.ab10f8fb-9132-47cb-82ff-f8b4ff001b69.png", indice: 91.0 },
+    { id: 45, nome: "Ti si incastra la maglia nell'autobus", immagine: "https://copilot.microsoft.com/th/id/BCO.15befef2-3af0-42bd-861d-28a32bc7fb8d.png", indice: 93.0 },
+    { id: 46, nome: "Ti cade la mazza sul piede", immagine: "https://copilot.microsoft.com/th/id/BCO.346dfe3a-dc91-4ffe-ab79-d85876741f82.png", indice: 95.0 },
+    { id: 47, nome: "Ti si rompe la zip del borsone", immagine: "https://copilot.microsoft.com/th/id/BCO.562f9bd3-a38f-45a5-9d2d-05a4a1380eff.png", indice: 85.0 },
+    { id: 48, nome: "Perdere la gara più importante per pochi millesimi di secondo", immagine: "https://copilot.microsoft.com/th/id/BCO.81d4bb68-12b1-4884-a846-78ae131eb2b2.png", indice: 100.0 },
+    { id: 49, nome: "Rompersi un braccio il giorno prima della partita", immagine: "https://copilot.microsoft.com/th/id/BCO.02adc38c-8eb2-4b5b-bf72-362e465756eb.png", indice: 98.0 },
+    { id: 50, nome: "Dimenticarsi i documenti e non poter giocare", immagine: "https://copilot.microsoft.com/th/id/BCO.d1a9f5ea-5b0e-4608-b0cd-e3be2b10eaaa.png", indice: 99.5 },
 ];
+/**
+ * @param {intero} arr 
+ * @returns Numero casuale
+ * @description Variabile che mischia le carte e le distribuisce casualmente 
+ */
+const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-export default function App (){
-    const [fase, setFase] = useState("home");      
-    const [mano, setMano] = useState([]);
-    const [cartaRound, setCartaRound] = useState(null);
-    const [vite, setVite] = useState(3);
-    const [timer, setTimer] = useState(30);
-    const [messaggio, setMessaggio] = useState("");
+/**
+ * @description Dichiarazione di tutti gli stati utili per lo sviluppo del gioco
+ */
 
-    /**
-     * @description Funzione dell'inizio del gioco, vengono mischiate le carte e successivamente distribuite le prime 3, viene cambiato lo stato
-     * da stato "home" si passa a stato "gioco"
-     */
-    const startGame = () => {
-    const iniziali = shuffle(CARTE).slice(0, 3).sort((a, b) => a.indice - b.indice);
+export default function App () {
+  const [fase, setFase] = useState("home");
+  const [mano, setMano] = useState([]);
+  const [cartaRound, setCartaRound] = useState(null);
+  const [vite, setVite] = useState(3);
+  const [timer, setTimer] = useState(30);
+  const [messaggio, setMessaggio] = useState("");
+
+  const startGame = () => {
+    const iniziali = shuffle(Carte).slice(0, 3).sort((a, b) => a.indice - b.indice);
     setMano(iniziali);
     setVite(3);
     setFase("gioco");
   };
 
   /**
-   * @description Funzione grafica che mostra 3 cuori rappresentanti le vite disponibili, quando si perde una vita il cuore diventa bianco
-   * in caso contrario rimane rosso
+   * @description Funzione per un nuovo round
    */
+
+  const nuovoRound = () => {
+    const disponibili = CARTE.filter(c => !mano.some(m => m.id === c.id));
+    const scelta = shuffle(disponibili)[0];
+    setCartaRound(scelta);
+    setTimer(30);
+    setFase("round");
+  };
   
-    const Vite = () => {
+  /**
+  * @description Funzione del timer che parte da 30 secondi, se il tempo scade si perde una vita
+  */
+
+  useEffect(() => {
+    if (fase !== "round") return;
+    if (timer === 0) {
+      setVite(vite - 1);
+      setMessaggio("Tempo scaduto! Hai perso una vita :(");
+      setFase("risultato");
+      return;
+    }
+  }, [fase, timer]);
+
+  /**
+   * @description Funzione che controlla se il giocatore ha 6 carte o 0 vite, in entrambi i casi il gioco si ferma
+   */
+
+  useEffect(() => {
+    if (mano.length === 6) {
+      setMessaggio("Hai vinto! Hai ottenuto 6 carte :)");
+      setFase("fine");
+    }
+    if (vite === 0) {
+      setMessaggio("Hai perso! Hai finito le vite :(");
+      setFase("fine");
+    }
+  }, [mano, vite]);
+
+  /**
+   * @returns Grafica dei cuori che rappresentano le vite disponibili e quelle perse
+   */
+
+  const Vite = () => {
     return (
       <Text style={styles.vite}>
         {vite >= 1 ? "❤️" : "🤍"}
@@ -107,10 +138,10 @@ export default function App (){
       </Text>
     );
   };
-  
+
   /**
-   * @description Controllo della posizione corretta all'interno del mazzo, se la carta è stata messa nella posizione giusta viene aggiunta
-   * al mazzo, in caso contrario viene tolta una vita e un cuore diventa di colore bianco
+   * @param {intero} posizioneScelta 
+   * @description Funzione che verifica se la posizione della carta è stata messa nella posizione giusta
    */
 
   const controlla = (posizioneScelta) => {
@@ -124,96 +155,93 @@ export default function App (){
       setVite(vite - 1);
       setMessaggio("SBAGLIATO! Hai perso una vita.");
     }
-
     setFase("risultato");
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /**
+   * @description Controllo di tutti gli stati con le rispettive schermate e bottoni
+   */
+
+  if (fase === "home") {
+    return (
+      <SafeAreaView style={styles.center}>
+        <Text style={{alignItems: "center", fontSize: 40, marginBottom: 20, fontWeight: "bold"}}>
+          Gioco della Sfortuna
+        </Text>
+        <Button title="Inizia Partita" onPress={startGame} />
+      </SafeAreaView>
+    );
+  }
+
+  if (fase === "gioco") {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.titolo}>Le tue carte iniziali</Text>
+
+        <Text style={styles.info}>Carte: {mano.length} / 6</Text>
+        <Vite />
+
+        {mano.map(c => (
+          <Text key={c.id}>{c.nome} — {c.indice}</Text>
+        ))}
+
+        <Button title="Nuovo Round" onPress={nuovoRound} />
+      </SafeAreaView>
+    );
+  }
+
+  if (fase === "round") {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.titolo}>Nuova Carta</Text>
+
+        <Text style={styles.info}>Carte: {mano.length} / 6</Text>
+        <Vite />
+        <Text style={styles.timer}>⏳ {timer}s</Text>
+
+        <Image source={{ uri: cartaRound.immagine }} style={styles.img} />
+        <Text style={styles.nome}>{cartaRound.nome}</Text>
+
+        {mano.map((m, i) => (
+          <Button
+            key={i}
+            title={`${i + 1}`}
+            onPress={() => controlla(i)}
+          />
+        ))}
+
+        <Button
+          title={`${mano.length + 1}`}
+          onPress={() => controlla(mano.length)}
+        />
+      </SafeAreaView>
+    );
+  }
+
+  if (fase === "risultato") {
+    return (
+      <SafeAreaView style={styles.center}>
+        <Text style={styles.titolo}>{messaggio}</Text>
+        <Button title="Continua" onPress={nuovoRound} />
+      </SafeAreaView>
+    );
+  }
+
+  if (fase === "fine") {
+    return (
+      <SafeAreaView style={styles.center}>
+        <Text style={styles.titolo}>{messaggio}</Text>
+        <Button title="Torna alla schermata home" onPress={() => setFase("home")} />
+      </SafeAreaView>
+    );
+  }
+
+  return null;
+}
+
+/**
+ * @description Funzione StyleSheet con stili per ogni schermata richiamata 
+ */
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
@@ -222,8 +250,6 @@ const styles = StyleSheet.create({
   info: { fontSize: 18, marginBottom: 5, alignItems: "center" },
   timer: { fontSize: 26, fontWeight: "bold", color: "red", marginBottom: 10 },
   vite: { fontSize: 30, marginBottom: 10, alignItems: "center", marginLeft: 250, marginTop: 15 },
-  img: { width: "40%", height: 200, marginVertical: 10, borderRadius: 10, resizeMode: "cover", marginLeft: 110},
+  img: { width: "40%", height: 200, marginVertical: 10, borderRadius: 10, resizeMode: "cover", marginLeft: 110 },
   nome: { fontSize: 20, marginTop: 10 },
 });
-
-}
