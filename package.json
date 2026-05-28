@@ -1,0 +1,24 @@
+{
+  "name": "prog_finale",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gioco_Della_Sfortuna.js",
+  "scripts": {
+  "doc": "jsdoc -c jsdoc.json"
+},
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClaudiaSeri3/Progetto_finale.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClaudiaSeri3/Progetto_finale/issues"
+  },
+  "homepage": "https://github.com/ClaudiaSeri3/Progetto_finale#readme",
+  "devDependencies": {
+    "jsdoc": "^4.0.5"
+  }
+}
